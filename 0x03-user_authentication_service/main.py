@@ -3,19 +3,19 @@
 Main file
 """
 from user import User
+from db import DB
+from user import User
+from auth import _hash_password
+
+from sqlalchemy.exc import InvalidRequestError
+from sqlalchemy.orm.exc import NoResultFound
+
 
 print(User.__tablename__)
 
 for column in User.__table__.columns:
     print("{}: {}".format(column, column.type))
 
-
-"""
-Main file
-"""
-
-from db import DB
-from user import User
 
 my_db = DB()
 
@@ -24,15 +24,6 @@ print(user_1.id)
 
 user_2 = my_db.add_user("test1@test.com", "SuperHashedPwd1")
 print(user_2.id)
-
-"""
-Main file
-"""
-from db import DB
-from user import User
-
-from sqlalchemy.exc import InvalidRequestError
-from sqlalchemy.orm.exc import NoResultFound
 
 
 my_db = DB()
@@ -55,16 +46,6 @@ try:
 except InvalidRequestError:
     print("Invalid")
     
-"""
-Main file
-"""
-from db import DB
-from user import User
-
-from sqlalchemy.exc import InvalidRequestError
-from sqlalchemy.orm.exc import NoResultFound
-
-
 my_db = DB()
 
 email = 'test@test.com'
@@ -79,19 +60,9 @@ try:
 except ValueError:
     print("Error")
 
-    
-"""
-Main file
-"""
-from auth import _hash_password
 
 print(_hash_password("Hello Holberton"))
 
-
-"""
-Main file
-"""
-from auth import Auth
 
 email = 'me@me.com'
 password = 'mySecuredPwd'
@@ -111,11 +82,6 @@ except ValueError as err:
     print("could not create a new user: {}".format(err))        
 
 
-"""
-Main file
-"""
-from auth import Auth
-
 email = 'bob@bob.com'
 password = 'MyPwdOfBob'
 auth = Auth()
@@ -128,10 +94,6 @@ print(auth.valid_login(email, "WrongPwd"))
 
 print(auth.valid_login("unknown@email", password))
 
-"""
-Main file
-"""
-from auth import Auth
 
 email = 'bob@bob.com'
 password = 'MyPwdOfBob'
